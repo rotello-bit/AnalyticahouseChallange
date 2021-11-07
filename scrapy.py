@@ -92,8 +92,11 @@ def create_workers():
 
 def create_jobs():
     urls = pd.read_excel(r'URLs.xlsx')
-
+    count = 0
     for link in (base_url + urls).iloc[:, 0]:
+        count += 1
+        if count > 50:
+            break
         q.put(link)
     q.join()
 
